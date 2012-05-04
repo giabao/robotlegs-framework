@@ -163,9 +163,7 @@ package org.robotlegs.base
 		 */
 		public function registerMediator(viewComponent:Object, mediator:IMediator):void
 		{
-			var mediatorClass:Class = reflector.getClass(mediator);
-			injector.hasMapping(mediatorClass) && injector.unmap(mediatorClass);
-			injector.mapValue(mediatorClass, mediator);
+			//@see https://github.com/robotlegs/robotlegs-framework/issues/25#issuecomment-2427077
 			mediatorByView[viewComponent] = mediator;
 			mappingConfigByView[viewComponent] = mappingConfigByViewClassName[getQualifiedClassName(viewComponent)];
 			mediator.setViewComponent(viewComponent);
@@ -177,15 +175,14 @@ package org.robotlegs.base
 		 */
 		public function removeMediator(mediator:IMediator):IMediator
 		{
+			//@see https://github.com/robotlegs/robotlegs-framework/issues/25#issuecomment-2427077
 			if (mediator)
 			{
 				var viewComponent:Object = mediator.getViewComponent();
-				var mediatorClass:Class = reflector.getClass(mediator);
 				delete mediatorByView[viewComponent];
 				delete mappingConfigByView[viewComponent];
 				mediator.preRemove();
 				mediator.setViewComponent(null);
-				injector.hasMapping(mediatorClass) && injector.unmap(mediatorClass);
 			}
 			return mediator;
 		}
@@ -247,6 +244,9 @@ package org.robotlegs.base
 			{
 				contextView.addEventListener(Event.ADDED_TO_STAGE, onViewAdded, useCapture, 0, true);
 				contextView.addEventListener(Event.REMOVED_FROM_STAGE, onViewRemoved, useCapture, 0, true);
+				/*because useCapture == true && when use capture, REMOVED_FROM_STAGE is not trigger if target
+				 * is the contextView itself!*/
+				contextView.addEventListener(Event.REMOVED_FROM_STAGE, onViewRemoved);
 			}
 		}
 		
@@ -259,6 +259,7 @@ package org.robotlegs.base
 			{
 				contextView.removeEventListener(Event.ADDED_TO_STAGE, onViewAdded, useCapture);
 				contextView.removeEventListener(Event.REMOVED_FROM_STAGE, onViewRemoved, useCapture);
+				contextView.removeEventListener(Event.REMOVED_FROM_STAGE, onViewRemoved);
 			}
 		}
 		

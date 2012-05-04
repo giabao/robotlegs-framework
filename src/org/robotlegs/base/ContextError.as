@@ -23,7 +23,7 @@ package org.robotlegs.base
 		
 		public static const E_CONTEXT_INJECTOR:String = 'The ContextBase does not specify a concrete IInjector. Please override the injector getter in your concrete or abstract Context.';
 		public static const E_CONTEXT_REFLECTOR:String = 'The ContextBase does not specify a concrete IReflector. Please override the reflector getter in your concrete or abstract Context.';
-		public static const E_CONTEXT_VIEW_OVR:String = 'Context contextView must only be set once';
+		public static const E_CONTEXT_VIEW_OVR:String = 'Context contextView must only be set once';//+ sd vs 1.5.2
 		
 		public function ContextError(message:String = "", id:int = 0)
 		{

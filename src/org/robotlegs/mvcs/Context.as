@@ -16,7 +16,7 @@ package org.robotlegs.mvcs
 	import org.robotlegs.adapters.SwiftSuspendersReflector;
 	import org.robotlegs.base.CommandMap;
 	import org.robotlegs.base.ContextBase;
-	import org.robotlegs.base.ContextError;
+	import org.robotlegs.base.ContextError;//+ sd vs 1.5.2
 	import org.robotlegs.base.ContextEvent;
 	import org.robotlegs.base.EventMap;
 	import org.robotlegs.base.MediatorMap;
@@ -122,7 +122,7 @@ package org.robotlegs.mvcs
 			_contextView = contextView;
 			_autoStartup = autoStartup;
 			
-			if (_contextView)
+			if (_contextView)//+ sd vs 1.5.2
 			{
 				mapInjections();
 				checkAutoStartup();
@@ -174,6 +174,9 @@ package org.robotlegs.mvcs
 		 */
 		public function set contextView(value:DisplayObjectContainer):void
 		{
+			//sd vs 1.5.2:
+			//sd permit CONTEXT_VIEW_OVR, but clear local fileds then re-map injections
+			//1.5.2: throw E_CONTEXT_VIEW_OVR
 			if (value == _contextView)
 				return;
 			

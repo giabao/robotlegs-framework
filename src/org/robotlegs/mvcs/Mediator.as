@@ -106,7 +106,7 @@ package org.robotlegs.mvcs
 			eventMap.mapListener(IEventDispatcher(viewComponent), type, listener, 
 				eventClass, useCapture, priority, useWeakReference); 
 		}
-
+		//[+ sd vs 1.5.2
         /**
 		 * Syntactical sugar for mapping a listener from the <code>viewComponent</code>
 		 *
@@ -121,7 +121,7 @@ package org.robotlegs.mvcs
 			eventMap.unmapListener(IEventDispatcher(viewComponent), type, listener,
 				eventClass, useCapture);
 		}
-
+		//]+ sd vs 1.5.2
 		/**
 		 * Syntactical sugar for mapping a listener to an <code>IEventDispatcher</code> 
 		 * 
@@ -139,7 +139,7 @@ package org.robotlegs.mvcs
 			eventMap.mapListener(eventDispatcher, type, listener, 
 				eventClass, useCapture, priority, useWeakReference); 									   
 		}
-
+		//[+ sd vs 1.5.2
 		/**
 		 * Syntactical sugar for unmapping a listener from an <code>IEventDispatcher</code>
 		 *
@@ -155,5 +155,6 @@ package org.robotlegs.mvcs
 			eventMap.unmapListener(eventDispatcher, type, listener,
 				eventClass, useCapture);
 		}
+		//]+ sd vs 1.5.2
 	}
 }
